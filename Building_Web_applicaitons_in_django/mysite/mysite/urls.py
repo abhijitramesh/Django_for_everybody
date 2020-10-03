@@ -23,4 +23,6 @@ urlpatterns = [
     path('polls/',include('polls.urls')),
     path('hello/', include('hello.urls')),
     path('hello/polls/', include('polls.urls')),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('autos/', include('autos.urls')),
 ]
