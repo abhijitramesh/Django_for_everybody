@@ -23,20 +23,24 @@ class MakeView(LoginRequiredMixin, View):
         ctx = {'make_list': ml}
         return render(request, 'autos/make_list.html', ctx)
 
+
 class MakeCreate(LoginRequiredMixin, CreateView):
     model = Make
     fields = '__all__'
     success_url = reverse_lazy('autos:all')
 
-class MakeUpdate(LoginRequiredMixin,UpdateView):
+
+class MakeUpdate(LoginRequiredMixin, UpdateView):
     model = Make
     fields = '__all__'
     success_url = reverse_lazy('autos:all')
 
-class MakeDelete(LoginRequiredMixin,DeleteView):
+
+class MakeDelete(LoginRequiredMixin, DeleteView):
     model = Make
     fields = "__all__"
     success_url = reverse_lazy('autos:all')
+
 
 class AutoCreate(LoginRequiredMixin, CreateView):
     model = Auto
