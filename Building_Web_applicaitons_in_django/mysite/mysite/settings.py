@@ -49,10 +49,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'social_django',
     'home.apps.HomeConfig',
+     'unesco.apps.UnescoConfig',
 ]
 
-# When we get to crispy forms :)
-CRISPY_TEMPLATE_PACK = 'bootstrap3'  # Add
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
