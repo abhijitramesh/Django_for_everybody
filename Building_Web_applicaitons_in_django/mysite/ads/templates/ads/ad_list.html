@@ -11,6 +11,27 @@
         (<a href="{% url 'ads:ad_update' ad.id %}">Edit</a> |
         <a href="{% url 'ads:ad_delete' ad.id %}">Delete</a>)
         {% endif %}
+        {% if user.is_authenticated %}
+        <a href="#" onclick=
+            "favPost('{% url 'ads:ad_unfavorite' ad.id %}', {{ ad.id }} );return false;"
+            {% if ad.id not in favorites %} style="display: none;" {% endif %}
+            id="favorite_star_{{ad.id}}">
+        <span class="fa-stack" style="vertical-align: middle;">
+        <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
+        <i class="fa fa-star-o fa-stack-1x"></i>
+        </span>
+        </a>
+        <!-- the second href -->
+        <a href="#" onclick=
+             "favPost('{% url 'ads:ad_favorite' ad.id %}', {{ ad.id }} );return false;"
+            {% if ad.id in favorites %} style="display: none;" {% endif %}
+            id="unfavorite_star_{{ad.id}}">
+        <span class="fa-stack" style="vertical-align: middle;">
+        <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
+        <i class="fa fa-star-o fa-stack-1x"></i>
+        </span>
+        </a>
+        {% endif %}
     </li>
   {% endfor %}
 </ul>
@@ -26,4 +47,16 @@
 <a href="{% url 'login' %}?next={% url 'ads:all' %}">Login</a>
 {% endif %}
 </p>
+<script>
+function favPost(url, ad_id){
+    console.log('Requestiong JSON');
+    $.post(url,{},function(rowz){
+        console.log(url,'finished');
+        $("#unfavorite_star_"+ad_id).toggle();
+        $("#favorite_star_"+ad_id).toggle();
+    }).fail(function(xhr){
+        alert('Url falied with ' +xhr.satus+' '+url);
+    });
+}
+</script>
 {% endblock %}
